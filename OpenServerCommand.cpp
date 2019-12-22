@@ -7,12 +7,12 @@
 #include <thread>
 #include <unordered_map>
 
-#define PORT_TEMP 5400
 
 using namespace std;
 
-int OpenServerCommand::execute(vector<string> vectOfParam)
+int OpenServerCommand::execute(vector<string> vectOfParam, int indexCurr)
 {
+    int PORT_TEMP = stoi(vectOfParam.at(indexCurr + 1));
 
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1)
@@ -60,14 +60,14 @@ int OpenServerCommand::execute(vector<string> vectOfParam)
 
     int i = 0, numOfValue = 0;
     string data;
-    unordered_map<string, double> simGotValue; //add to member of server
+    //unordered_map<string, double> simGotValue; //add to member of server
     while (buffer[i] != '\n')
     {
 
         if (buffer[i] == ',')
         {
             //double num = stold(data);
-            simGotValue.insert({this->orderedXML.at(numOfValue),stold(data)});
+            this->bindValue->insert({this->orderedXML.at(numOfValue),stold(data)});
             numOfValue++;
             data.clear();
         
@@ -78,6 +78,10 @@ int OpenServerCommand::execute(vector<string> vectOfParam)
         }
         i++;
     }
-    this->bindValue = simGotValue;
+    //////////////////////////////
     return this->DILUG;
+}
+
+unordered_map<string, double>* OpenServerCommand:: getTable_XML_VAR(){
+    return this->bindValue;
 }
