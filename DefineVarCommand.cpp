@@ -25,42 +25,33 @@ int DefineVarCommand::execute(vector<string> vectOfParam, int indexCurr)
     if (is_binding)
     {
         string sim = vectOfParam.at(indexCurr + 4);
-        double value = -1000;
-        if (this->bindXMLValueFromServer->size() > 0)
+        double value = -10000;
+        //
+        unordered_map<std::string, double>::iterator itToCheck = this->bindXMLValueFromServer->find(sim);
+        if (itToCheck != bindXMLValueFromServer->end())
         {
             value = this->bindXMLValueFromServer->find(sim)->second;
         }
         Var *varToAdd = new Var(value, sim, nameVar, bind_FROM_sim, bind_IN_sim, is_binding);
         this->listOfProgVar->push_back(varToAdd);
+
+        this->nameVar_ToVar->insert({nameVar, varToAdd});
+        this->SIM_ToVar->insert({sim,varToAdd});
+
         this->DILUG = 5;
     }
     else
     { // not binding rather there is var __ = smt or var __ = number;
-        string sim = NULL;
+        string sim = "";
         int flagFound = 0;
         double numToAdd;
 
-        list<Var *>::iterator it = this->listOfProgVar->begin();
-
-        while ( it  != listOfProgVar->end() )
+        if (this->nameVar_ToVar->find(vectOfParam.at(indexCurr + 3)) == this->nameVar_ToVar->end())
         {
-            if ((*it)->getVarName() == vectOfParam.at(indexCurr + 3))
-            {
-                break;
-            }
-
-            *(it)++;
-        }
-        if ((*it)->getVarName() == vectOfParam.at(indexCurr + 3))
-        {
-            flagFound = 1;
-            numToAdd = (*it)->getValue();
-        }
-        else
-        { // there is a number
+            // no var name => the is a number
             if (vectOfParam.at(indexCurr + 3) == "-")
             {
-                numToAdd = stold(vectOfParam.at(indexCurr + 4));// if there is minus before
+                numToAdd = stold(vectOfParam.at(indexCurr + 4)); // if there is minus before
                 numToAdd *= -1;
                 this->DILUG = 5;
             }
@@ -70,8 +61,18 @@ int DefineVarCommand::execute(vector<string> vectOfParam, int indexCurr)
                 this->DILUG = 4;
             }
         }
+        else
+        { //  var name  exist
+
+            numToAdd =  this->nameVar_ToVar->find(vectOfParam.at(indexCurr + 3))->second->getValue();
+            this->DILUG = 4;
+        }
+
         Var *toAdd = new Var(numToAdd, sim, nameVar, bind_FROM_sim, bind_IN_sim, is_binding);
         this->listOfProgVar->push_back(toAdd);
+
+        this->nameVar_ToVar->insert({nameVar, toAdd});
+        
     }
 
     return this->DILUG;
