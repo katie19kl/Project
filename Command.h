@@ -1,17 +1,14 @@
-//
-// Created by katie on 21/12/2019.
-//
+#ifndef Command_H
+#define Command_H
 
-#ifndef PROJECT__COMMAND_H_
-#define PROJECT__COMMAND_H_
+#include <stdio.h>
+#include <string>
+#include <vector>
 
-using namespace std;
-
-class Command {
-
- public:
-  virtual int execute() = 0;
-  virtual ~Command() {};
+class Command
+{
+public:
+    virtual int execute(std::vector <std::string>, int ) = 0; 
 };
 
-#endif //PROJECT__COMMAND_H_
+#endif
