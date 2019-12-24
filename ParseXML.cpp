@@ -4,18 +4,19 @@
 #include <iostream>
 #include <algorithm>
 #include <vector> 
+#include "Command.h"
+#include "OpenServerCommand.h"
+#include <thread>
+#include "ParseXML.h"
 
-void parseXML();
 using namespace std;
 
-int main()
-{
-    parseXML();
-}
+
+
 /*
 Reads XML and adds sim to vector simFromSim
 */
-void parseXML()
+vector <string> parseXML()
 {
     vector <string> simFromSim;
     string fileName = "generic_small.xml";
@@ -28,7 +29,7 @@ void parseXML()
     if (!in)
     {
         cout << "file was not found!!!!!!!!!!!!!!!!!!!!!!!!";
-        return;
+        return simFromSim;
     }
     string line;
             int x = 0;
@@ -57,7 +58,7 @@ void parseXML()
 
                 simFromSim.push_back(line.substr(6, strLen - (leftStart.length() + rightEnd.length() + 1)));
 
-                cout << line.substr(6, strLen - (leftStart.length() + rightEnd.length() + 1));
+                //cout << line.substr(6, strLen - (leftStart.length() + rightEnd.length() + 1));
             }
         }
 
@@ -66,5 +67,5 @@ void parseXML()
         throw logic_error ( " is lack of var");
     }
     in.close();
-    return;
+    return simFromSim;
 }
