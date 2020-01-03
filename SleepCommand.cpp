@@ -4,6 +4,12 @@
 
 #include <thread>
 #include <iostream>
+#include "SleepCommand.h"
+#include "Ex1.h"
+
+
+#include <thread>
+#include <iostream>
 #include <sstream>
 #include "SleepCommand.h"
 #include "Ex1.h"
