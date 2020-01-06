@@ -10,16 +10,22 @@
 #include "Var.h"
 #include "FuncParser.h"
 #include "SymboleTable.h"
+#include <string>
 
-class FuncCommand: public Command {
- private:
-  unordered_map<string, Var*> * name_to_var;
-  unordered_map<string, Command*> * fromTape;
-  FuncParser * func_parser;
- public:
-  FuncCommand(SymboleTable * symbol_table,
+using namespace std;
+
+class FuncCommand : public Command
+{
+private:
+  unordered_map<string, Var *> *name_to_var;
+  unordered_map<string, Command *> *fromTape;
+  FuncParser *func_parser;
+
+public:
+  FuncCommand(SymboleTable* symbol_table,
               unordered_map<string, Command *> *from_tape,
-              FuncParser * func_parser1) {
+              FuncParser *func_parser1)
+  {
     this->name_to_var = symbol_table->get_NameVar_ToVar();
     this->fromTape = from_tape;
     this->func_parser = func_parser1;

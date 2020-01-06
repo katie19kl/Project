@@ -36,7 +36,7 @@ int LoopCommand::execute(vector<string> tokens, int index) {
     commandsVec = condition_parser.createCommandsVector(tokens, k, j);
 
     do {
-      int i = 0;
+      unsigned long i = 0;
       while (i < commandsVec.size()) {
         Command *c;
 

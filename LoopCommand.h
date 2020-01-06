@@ -16,12 +16,12 @@ class LoopCommand: public Command {
  private:
   unordered_map<string, Command*> * fromTape;
   unordered_map<string, Var*> * name_to_var;
-  FuncParser * func_parser;
+  FuncParser* func_parser;
 
  public:
   LoopCommand(unordered_map<string, Command *> *from_tape_map,
-              SymboleTable * symbol_table,
-              FuncParser * func_parser1) {
+              SymboleTable* symbol_table,
+              FuncParser *func_parser1) {
     this->fromTape = from_tape_map;
     this->name_to_var = symbol_table->get_NameVar_ToVar();
     this->func_parser = func_parser1;
