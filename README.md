@@ -22,14 +22,14 @@ g++ -std=c++14 *.cpp -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -o SERV
 Now, that an execution file a.out is created, we can run the program, while also passing the name of the txt file containing the code we interpret. For example:
 
 ```bash
-SERVER [FILE_NAME]
+SERVER FILE_NAME
 ```
 
 After running the program, we also run the FlightGear simulator(or the python script that simulates the flightGear's simulator actions).
 
 ## Comments
 
-Our program runs perfectly with both the python script "fake_server.py" and the FlightGear simulator. In the simulator we see that the plane flies without any problem, and the parsing and execution of the code in text file provided is indeed finished.
+1. Our program runs perfectly with both the python script "fake_server.py" and the FlightGear simulator. In the simulator we see that the plane flies without any problem, and the parsing and execution of the code in text file provided is indeed finished.
 
-We also handled the txt file
+2. Our project is handling the bonus for func Command, meaning- it can interpret function definitions in the txt file and execute them with the FuncCommand object we created.
 
