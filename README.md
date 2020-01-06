@@ -16,13 +16,13 @@ First, unzip the file.
 Now we can compile the project files with the following command in the commandline(terminal):
 
 ```bash
-g++ -std=c++14 *.cpp -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -o a.out -pthread
+g++ -std=c++14 *.cpp -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -o SERVER -pthread
 ```
 
 Now, that an execution file a.out is created, we can run the program, while also passing the name of the txt file containing the code we interpret. For example:
 
 ```bash
-./a.out fly.txt
+SERVER [FILE_NAME]
 ```
 
 After running the program, we also run the FlightGear simulator(or the python script that simulates the flightGear's simulator actions).
@@ -30,4 +30,6 @@ After running the program, we also run the FlightGear simulator(or the python sc
 ## Comments
 
 Our program runs perfectly with both the python script "fake_server.py" and the FlightGear simulator. In the simulator we see that the plane flies without any problem, and the parsing and execution of the code in text file provided is indeed finished.
+
+We also handled the txt file
 
