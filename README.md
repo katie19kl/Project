@@ -22,7 +22,7 @@ g++ -std=c++14 *.cpp -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -o SERV
 Now, that an execution file a.out is created, we can run the program, while also passing the name of the txt file containing the code we interpret. For example:
 
 ```bash
-SERVER FILE_NAME
+SERVER filename
 ```
 
 After running the program, we also run the FlightGear simulator(or the python script that simulates the flightGear's simulator actions).
